@@ -49,11 +49,59 @@ function booWho(bool) {
 
 function titleCase(str) {
   let strSplit = str.split(" ");
-  let num = []
-  for(let i = 0; i < strSplit.length; i++){
-      num[i] = strSplit[i][0].toUpperCase() + strSplit[i].slice(1).toLowerCase()
+  let num = [];
+  for (let i = 0; i < strSplit.length; i++) {
+    num[i] = strSplit[i][0].toUpperCase() + strSplit[i].slice(1).toLowerCase();
   }
-  return num.join(" ")
+  return num.join(" ");
 }
 
-console.log(titleCase("I'm a little tea pot"));
+// console.log(titleCase("I'm a little tea pot"));
+
+// Splice and Slice Array method
+
+// Slice
+const cities = ["Lagos", "Abuja", "Ilorin", "Ibadan"];
+const newCities = cities.slice(2);
+// slice(optional start parameter, optional end parameter)
+// console.log(cities)
+// console.log(newCities)
+
+// with slice array method the original array is not affected
+// and the end parameter is not included in the array
+
+// const numbers = [1,4,2,3,42,5]
+// const newNum = numbers.slice(1,4)
+// console.log(newNum) //Expected Output: 4,2,3
+
+// Splice
+
+const food = ["pizza", "cake", "salad", "cookie"];
+
+food.splice(1, 1, "amala");
+food.splice(0, 0, "Semolina");
+// splice(start, optional delete count, optional items to add)
+// console.log(food)
+
+food.splice(1, 5);
+// console.log(food)
+
+// The Splice() array methods affects the original array
+// It can take in three parameters Splice(start, Optional delete, add)
+
+// falsy bounce
+function bouncer(arr) {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if(arr[i]){
+        newArr.push(arr[i])
+    }
+  }
+  console.log(newArr)
+}
+
+const test1 = [7, "ate", "", false, 9]
+const test2 = ["a","b", "c"]
+const test3 = [false, null, 0, NaN, undefined, ""]
+
+
