@@ -93,15 +93,31 @@ food.splice(1, 5);
 function bouncer(arr) {
   let newArr = [];
   for (let i = 0; i < arr.length; i++) {
-    if(arr[i]){
-        newArr.push(arr[i])
+    if (arr[i]) {
+      newArr.push(arr[i]);
     }
   }
-  console.log(newArr)
+  console.log(newArr);
 }
 
-const test1 = [7, "ate", "", false, 9]
-const test2 = ["a","b", "c"]
-const test3 = [false, null, 0, NaN, undefined, ""]
+const test1 = [7, "ate", "", false, 9];
+const test2 = ["a", "b", "c"];
+const test3 = [false, null, 0, NaN, undefined, ""];
 
 
+
+
+
+// palindrome
+function palindrome(str) {
+    let newStr = str.toLowerCase().replace(/[\W_]/g, "");
+    let newStrSplit = newStr.split("");
+    let newStrReverse = newStrSplit.reverse();
+    let newStrJoin = newStrReverse.join("");
+    if (newStr === newStrJoin) {
+        return true;
+    } else return false;
+}
+
+palindrome("eye");
+// console.log(palindrome("eye"));
