@@ -121,3 +121,89 @@ function palindrome(str) {
 
 palindrome("eye");
 // console.log(palindrome("eye"));
+
+
+
+
+
+// Function to verify if the values in the second array correspond to the square values of the first array
+function same(arr1, arr2){
+  if(arr1.length !== arr2.length){
+    return false
+  }
+  for(let i = 0; i < arr1.length; i++){
+    // Checks to see if the square of the first array is in the second array
+    let correctIndex = arr2.indexOf(arr1[i] ** 2)
+    if(correctIndex === -1){
+      return false
+    }
+    // The below then removes the current element and runs the loop again
+    arr2.splice(correctIndex, 1)
+    
+  }
+  return true
+}
+
+
+// using frequecy pattern
+
+function refacSame(arr1, arr2){
+  if(arr1.length !== arr2.length){
+    return false
+  }
+  let frequency1 = {}
+  let frequency2 = {}
+  for (let el in arr1){
+    frequency1[el] = (frequency1[el] || 0) + 1
+  }
+  for (let el in arr2){
+    frequency2[el] = (frequency2[el] || 0) + 1
+  }
+  console.log(frequency1)
+  console.log(frequency2)
+
+  for (let key in frequency1){
+    if(!(key ** 2 in frequency2)){
+      return false
+    }
+    if(frequency2[key ** 2] !== frequency1[key]){
+      return false
+    }
+  }
+  return true
+}
+
+// console.log(same([2,2,3], [4,9,4]))
+// console.log(refacSame([2,2,3], [4,9,4]))
+
+
+
+function validAnagram(first, second) {
+  if (first.length !== second.length) {
+    return false;
+  }
+
+  const lookup = {};
+
+  for (let i = 0; i < first.length; i++) {
+    let letter = first[i];
+    // if letter exists, increment, otherwise set to 1
+    lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1;
+  }
+  console.log(lookup)
+
+  for (let i = 0; i < second.length; i++) {
+    let letter = second[i];
+    // can't find letter or letter is zero then it's not an anagram
+    if (!lookup[letter]) {
+      return false;
+    } else {
+      lookup[letter] -= 1;
+    }
+  }
+
+  return true;
+}
+
+// {a: 0, n: 0, g: 0, r: 0, m: 0,s:1}
+console.log(validAnagram('anagrams', 'nagaramm'))
