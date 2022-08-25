@@ -110,13 +110,13 @@ const test3 = [false, null, 0, NaN, undefined, ""];
 
 // palindrome
 function palindrome(str) {
-    let newStr = str.toLowerCase().replace(/[\W_]/g, "");
-    let newStrSplit = newStr.split("");
-    let newStrReverse = newStrSplit.reverse();
-    let newStrJoin = newStrReverse.join("");
-    if (newStr === newStrJoin) {
-        return true;
-    } else return false;
+  let newStr = str.toLowerCase().replace(/[\W_]/g, "");
+  let newStrSplit = newStr.split("");
+  let newStrReverse = newStrSplit.reverse();
+  let newStrJoin = newStrReverse.join("");
+  if (newStr === newStrJoin) {
+    return true;
+  } else return false;
 }
 
 palindrome("eye");
@@ -127,19 +127,19 @@ palindrome("eye");
 
 
 // Function to verify if the values in the second array correspond to the square values of the first array
-function same(arr1, arr2){
-  if(arr1.length !== arr2.length){
+function same(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
     return false
   }
-  for(let i = 0; i < arr1.length; i++){
+  for (let i = 0; i < arr1.length; i++) {
     // Checks to see if the square of the first array is in the second array
     let correctIndex = arr2.indexOf(arr1[i] ** 2)
-    if(correctIndex === -1){
+    if (correctIndex === -1) {
       return false
     }
     // The below then removes the current element and runs the loop again
     arr2.splice(correctIndex, 1)
-    
+
   }
   return true
 }
@@ -147,26 +147,26 @@ function same(arr1, arr2){
 
 // using frequecy pattern
 
-function refacSame(arr1, arr2){
-  if(arr1.length !== arr2.length){
+function refacSame(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
     return false
   }
   let frequency1 = {}
   let frequency2 = {}
-  for (let el in arr1){
+  for (let el in arr1) {
     frequency1[el] = (frequency1[el] || 0) + 1
   }
-  for (let el in arr2){
+  for (let el in arr2) {
     frequency2[el] = (frequency2[el] || 0) + 1
   }
   console.log(frequency1)
   console.log(frequency2)
 
-  for (let key in frequency1){
-    if(!(key ** 2 in frequency2)){
+  for (let key in frequency1) {
+    if (!(key ** 2 in frequency2)) {
       return false
     }
-    if(frequency2[key ** 2] !== frequency1[key]){
+    if (frequency2[key ** 2] !== frequency1[key]) {
       return false
     }
   }
@@ -206,4 +206,66 @@ function validAnagram(first, second) {
 }
 
 // {a: 0, n: 0, g: 0, r: 0, m: 0,s:1}
-console.log(validAnagram('anagrams', 'nagaramm'))
+// console.log(validAnagram('anagrams', 'nagaramm'))
+
+
+
+// Multiple Pointers 
+// sumZero
+
+// simple approach
+function sumZero1(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[i] + arr[j] === 0) {
+        return ([arr[i], arr[j]])
+      }
+    }
+  }
+}
+// console.log(sumZero1([-3, -2, -1, 0, 1, 2, 3,4]))
+// Time complexity of O(N^2)
+
+
+function sumZero2(arr){
+  let left = 0
+  let right = arr.length -1
+  while (left < right){
+    let sum = arr[left] + arr[right]
+    if(sum === 0){
+      return [arr[left], arr[right]]
+    } else if(sum > 0){
+      right--
+    } else{
+      left ++
+    }
+  }
+}
+
+
+
+
+
+
+// Solving ceaser's cipher
+function rot13(str){
+  let encoded = ""
+  let firstSet = "abcdefghijklm".toUpperCase()
+  let secondSet = "nopqrstuvwxyz".toUpperCase()
+
+  for (let i = 0; i < str.length; i++){
+    let letterToDecode = str[i]
+
+    if(firstSet.indexOf(letterToDecode) >= 0){
+      encoded += secondSet[firstSet.indexOf(letterToDecode)]
+    } else if(secondSet.indexOf(letterToDecode) >= 0){
+      encoded += firstSet[secondSet.indexOf(letterToDecode)]
+    } else{
+      encoded += letterToDecode
+    }
+  }
+  return encoded
+}
+
+console.log(rot13("SERR PBQR PNZC"))
+console.log(rot13("SERR YBIR?"))
