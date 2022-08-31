@@ -227,17 +227,17 @@ function sumZero1(arr) {
 // Time complexity of O(N^2)
 
 
-function sumZero2(arr){
+function sumZero2(arr) {
   let left = 0
-  let right = arr.length -1
-  while (left < right){
+  let right = arr.length - 1
+  while (left < right) {
     let sum = arr[left] + arr[right]
-    if(sum === 0){
+    if (sum === 0) {
       return [arr[left], arr[right]]
-    } else if(sum > 0){
+    } else if (sum > 0) {
       right--
-    } else{
-      left ++
+    } else {
+      left++
     }
   }
 }
@@ -248,24 +248,244 @@ function sumZero2(arr){
 
 
 // Solving ceaser's cipher
-function rot13(str){
+function rot13(str) {
   let encoded = ""
   let firstSet = "abcdefghijklm".toUpperCase()
   let secondSet = "nopqrstuvwxyz".toUpperCase()
 
-  for (let i = 0; i < str.length; i++){
+  for (let i = 0; i < str.length; i++) {
     let letterToDecode = str[i]
 
-    if(firstSet.indexOf(letterToDecode) >= 0){
+    if (firstSet.indexOf(letterToDecode) >= 0) {
       encoded += secondSet[firstSet.indexOf(letterToDecode)]
-    } else if(secondSet.indexOf(letterToDecode) >= 0){
+    } else if (secondSet.indexOf(letterToDecode) >= 0) {
       encoded += firstSet[secondSet.indexOf(letterToDecode)]
-    } else{
+    } else {
       encoded += letterToDecode
     }
   }
   return encoded
 }
 
-console.log(rot13("SERR PBQR PNZC"))
-console.log(rot13("SERR YBIR?"))
+// console.log(rot13("SERR PBQR PNZC"))
+// console.log(rot13("SERR YBIR?"))
+
+
+// Telephone Number validator
+
+
+// correct format
+// 555-555-5555
+// (555)555-5555
+// (555) 555-5555
+// 555 555 5555
+// 5555555555
+// 1 555 555 5555
+
+function telephoneCheck(str) {
+  let hypNum = []
+  for (let i = 0; i < str.length; i++) {
+
+  }
+  if (str.indexOf("-") >= 0) hypNum.push(str.indexOf("-"))
+  return hypNum
+}
+
+// console.log(telephoneCheck("555-555-5555"));
+// console.log(telephoneCheck("2 555-555-5555"));
+// console.log(telephoneCheck("1 555-555-5555"));
+
+
+// Sliding window pattern
+
+// write a function which accepts an array or integers and a number called n.
+// The function should return the maximum sum of n consecutive elements in the array
+
+
+// naive approach
+function maxSubArraySum(arr, n) {
+  if (n > arr.length) {
+    return null
+  }
+  let max = -Infinity
+  for (let i = 0; i < arr.length - n + 1; i++) {
+    temp = 0
+    for (let j = 0; j < n; j++) {
+      temp += arr[i + j];
+    }
+    if (temp > max) {
+      max = temp
+    }
+  }
+  return max
+}
+
+// let result = maxSubArraySum([1,2,3,4], 2)
+// console.log(result)
+
+// sliding window approach
+
+const maxSubArraySum2 = (arr, num) => {
+  let maxSum = 0
+  let tempSum = 0
+  if (arr.length < num) return null
+  for (let i = 0; i < num; i++) {
+    maxSum += arr[i]
+  }
+  tempSum = maxSum
+  for (let i = num; i < arr.length; i++) {
+    tempSum = tempSum - arr[i - num] + arr[i]
+    maxSum = Math.max(maxSum, tempSum);
+  }
+  return maxSum
+}
+
+// let result2 = maxSubArraySum2([1,2,3,4], 2)
+// console.log(result2)
+
+
+// recursion
+// first recursive function
+
+function printNums(num) {
+  if (num <= 0) {
+    console.log("All done ")
+    return
+  }
+  console.log(num)
+  num--
+  printNums(num)
+}
+
+// let result = printNums(3)
+// console.log(result)
+
+// second recursive function
+
+function sumRange(num) {
+  if (num === 1) return 1
+  return num + sumRange(num - 1)
+}
+
+
+
+
+function convertToRoman(num) {
+  var roman = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
+  var str = '';
+
+  for (var i of Object.keys(roman)) {
+    var q = Math.floor(num / roman[i]);
+    num -= q * roman[i];
+    str += i.repeat(q);
+  }
+
+  return str;
+}
+
+// let result = convertToRoman(40)
+// console.log(result)
+
+
+function romanize(num) {
+  let lookup = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  }
+  let roman = ''
+  let i;
+  for (i in lookup) {
+    while (num >= lookup[i]) {
+      roman += i
+      num -= lookup[i]
+    }
+  }
+  return roman;
+}
+
+// break down
+
+function breakDown(num) {
+  let lookup = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  }
+  let i;
+  let roman = ""
+  for (i in lookup) {
+    console.log(lookup[i])
+    while (num >= lookup[i]) {
+      roman = roman + i
+    }
+  }
+}
+
+console.log(breakDown())
+
+
+
+
+// POWER SOLUTION
+function power(base, exponent) {
+  if (exponent === 0) return 1;
+  return base * power(base, exponent - 1);
+}
+// FACTORIAL SOLUTION
+function factorial(x) {
+  if (x < 0) return 0;
+  if (x <= 1) return 1;
+  return x * factorial(x - 1);
+}
+// PRODUCT OF ARRAY SOLUTION
+function productOfArray(arr) {
+  if (arr.length === 0) {
+    return 1;
+  }
+  return arr[0] * productOfArray(arr.slice(1));
+}
+// RECURSIVE RANGE SOLUTION
+function recursiveRange(x) {
+  if (x === 0) return 0;
+  return x + recursiveRange(x - 1);
+}
+// FIBONACCI SOLUTION
+function fib(n) {
+  if (n <= 2) return 1;
+  return fib(n - 1) + fib(n - 2);
+}
